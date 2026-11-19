@@ -3,40 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2c3e50">
-  <title>English 365</title>
+  <meta name="theme-color" content="#c34a24">
+  <title>TigLingua</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
+  <!-- Подключаем шрифт, который похож на ваш (Nunito - круглый и мягкий) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>English 365</h1>
-    <div id="streak">🔥 0 дней подряд</div>
-  </header>
 
-  <main>
-    <section class="card" id="day-card">
-      <h2>День <span id="day-num">1</span> из 365</h2>
+  <!-- ЭКРАН 1: ГЛАВНАЯ -->
+  <div id="screen-home" class="screen active">
+    <h1 class="logo">TigLingua</h1>
+    <img src="tiger.png" alt="Tiger" class="mascot">
+    
+    <div class="menu-buttons">
+      <button class="main-btn" onclick="goToScreen('screen-tasks')">задание на сегодня</button>
+      <button class="main-btn" onclick="goToScreen('screen-review')">повторение</button>
+    </div>
+
+    <div class="day-badge">
+      <span id="day-num">1</span> из 365
+    </div>
+  </div>
+
+  <!-- ЭКРАН 2: ЗАДАНИЯ -->
+  <div id="screen-tasks" class="screen">
+    <button class="back-btn" onclick="goToScreen('screen-home')">← Назад</button>
+    
+    <!-- Карточка с заданием -->
+    <div class="card orange-card">
+      <h2>Задание дня</h2>
       <p id="day-theme">Тема дня загружается...</p>
-    </section>
+      <ul id="tasks" style="margin-top: 15px;"></ul>
+    </div>
 
-    <section class="card">
-      <h3>Задачи на сегодня</h3>
-      <ul id="tasks"></ul>
-    </section>
-
-    <section class="card">
-      <h3>Слова дня</h3>
+    <!-- Карточка со словами -->
+    <div class="card orange-card" style="flex-grow: 1;">
+      <h2>Слова дня</h2>
       <ul id="words"></ul>
-    </section>
+    </div>
 
-    <section class="card">
-      <h3>Таймер занятия</h3>
-      <div id="timer">30:00</div>
-      <button id="start-timer">Старт</button>
-      <button id="reset-timer">Сброс</button>
-    </section>
-  </main>
+    <div class="day-badge">
+      <span id="day-num-2">1</span> из 365
+    </div>
+  </div>
+
+  <!-- ЭКРАН 3: ПОВТОРЕНИЕ -->
+  <div id="screen-review" class="screen">
+    <button class="back-btn" onclick="goToScreen('screen-home')">← Назад</button>
+    
+    <div class="card orange-card" style="flex-grow: 1; height: 100%;">
+      <h2>Все выученные слова</h2>
+      <ul id="all-words"></ul>
+    </div>
+
+    <div class="day-badge">
+      <span id="day-num-3">1</span> из 365
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
