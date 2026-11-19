@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2c3e50">
+  <title>English 365</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header>
+    <h1>English 365</h1>
+    <div id="streak">🔥 0 дней подряд</div>
+  </header>
+
+  <main>
+    <section class="card" id="day-card">
+      <h2>День <span id="day-num">1</span> из 365</h2>
+      <p id="day-theme">Тема дня загружается...</p>
+    </section>
+
+    <section class="card">
+      <h3>Задачи на сегодня</h3>
+      <ul id="tasks"></ul>
+    </section>
+
+    <section class="card">
+      <h3>Слова дня</h3>
+      <ul id="words"></ul>
+    </section>
+
+    <section class="card">
+      <h3>Таймер занятия</h3>
+      <div id="timer">30:00</div>
+      <button id="start-timer">Старт</button>
+      <button id="reset-timer">Сброс</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
