@@ -43,3 +43,27 @@ button {
 button:active { opacity: 0.8; }
 .word-en { font-weight: bold; color: #f9a826; }
 .word-ru { color: #aaa; font-size: 0.9rem; }
+.speak-btn {
+  background: transparent;
+  border: 1px solid #4ecca3;
+  color: #4ecca3;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.speak-btn:active {
+  background: #4ecca3;
+  color: #1a1a2e;
+}
+li {
+  display: flex;
+  align-items: center; /* Выравниваем по центру */
+}
