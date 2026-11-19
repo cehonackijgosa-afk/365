@@ -1,4 +1,4 @@
-// ---------- ПЛАН НА 365 ДНЕЙ (первые дни для примера) ----------
+// 1. Сначала объявляем базу данных с планом
 const PLAN = {
   1: { theme: "Фонетика: звуки /iː/ и /ɪ/ (sheep vs ship). 10 слов: семья.",
        tasks: ["15 мин произношение", "10 слов в Anki", "Составить 5 предложений о себе", "5 мин аудирования"],
@@ -8,7 +8,7 @@ const PLAN = {
        words: [["bread","хлеб"],["milk","молоко"],["meat","мясо"],["fish","рыба"],["apple","яблоко"],["water","вода"],["tea","чай"],["coffee","кофе"],["sugar","сахар"],["salt","соль"]] }
 };
 
-// ---------- ФУНКЦИЯ ОЗВУЧКИ ----------
+// 2. Функция для озвучки
 function speak(text) {
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -20,17 +20,14 @@ function speak(text) {
   }
 }
 
-// ---------- ЛОГИКА ДНЯ ----------
-const startDate = localStorage.getItem('startDate') 
-  ? new Date(localStorage.getItem('startDate')) 
-  : new Date();
+// 3. Высчитываем, какой сегодня день
+const startDate = localStorage.getItem('startDate') ? new Date(localStorage.getItem('startDate')) : new Date();
 if (!localStorage.getItem('startDate')) {
   localStorage.setItem('startDate', startDate.toISOString());
 }
-
 const dayNum = Math.min(Math.floor((new Date() - startDate) / 86400000) + 1, 365);
 
-// Отображение дня
+// 4. Показываем номер дня и тему
 document.getElementById('day-num').textContent = dayNum;
 const today = PLAN[dayNum] || { 
   theme: "Повторение пройденного + свободная практика", 
@@ -39,7 +36,7 @@ const today = PLAN[dayNum] || {
 };
 document.getElementById('day-theme').textContent = today.theme;
 
-// Отображение задач
+// 5. Показываем задачи с чекбоксами
 const tasksEl = document.getElementById('tasks');
 const doneKey = `done-${dayNum}`;
 const done = JSON.parse(localStorage.getItem(doneKey) || '[]');
@@ -59,7 +56,7 @@ today.tasks.forEach((task, i) => {
   tasksEl.appendChild(li);
 });
 
-// Отображение слов с кнопкой озвучки
+// 6. Показываем слова с кнопкой озвучки
 const wordsEl = document.getElementById('words');
 today.words.forEach(([en, ru]) => {
   const li = document.createElement('li');
@@ -76,7 +73,7 @@ today.words.forEach(([en, ru]) => {
   wordsEl.appendChild(li);
 });
 
-// ---------- СТРИК (ДНИ ПОДРЯД) ----------
+// 7. Стрик (дни подряд)
 const lastVisit = localStorage.getItem('lastVisit');
 const streak = parseInt(localStorage.getItem('streak') || '0');
 const todayStr = new Date().toDateString();
@@ -89,7 +86,7 @@ if (lastVisit !== todayStr) {
 }
 document.getElementById('streak').textContent = `🔥 ${newStreak} дней подряд`;
 
-// ---------- ТАЙМЕР ----------
+// 8. Таймер
 let timeLeft = 30 * 60;
 let timerId = null;
 const timerEl = document.getElementById('timer');
@@ -101,14 +98,10 @@ document.getElementById('start-timer').onclick = () => {
   timerId = setInterval(() => {
     if (timeLeft <= 0) { clearInterval(timerId); timerId = null; alert('Время вышло! Молодец.'); return; }
     timeLeft--;
-
-l.textContent = fmt(timeLeft);
+    timerEl.textContent = fmt(timeLeft);
   }, 1000);
-};
+}
+
 document.getElementById('reset-timer').onclick = () => {
   clearInterval(timerId); timerId = null; timeLeft = 30 * 60; timerEl.textContent = fmt(timeLeft);
-}; timerE
-
-
-
-
+};;
